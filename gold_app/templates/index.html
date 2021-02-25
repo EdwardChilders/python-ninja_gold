@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div id="main">
+    <header>
+      <p>Your Gold: {{ request.session.gold }}
+      </p>
+    </header>
+    <div id="container">
+      <div class="box">
+        <h3>Farm</h3>
+        <p>(earns 10-20 gold)</p>
+        <form action="/process_money" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name='farm'>
+          <button type='submit'>Find Gold!</button>
+        </form>
+      </div>
+      <div class="box">
+        <h3>Cave</h3>
+        <p>(earns 5-10 gold)</p>
+        <form action="/process_money" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name='cave'>
+          <button type='submit'>Find Gold!</button>
+        </form>
+      </div>
+      <div class="box">
+        <h3>House</h3>
+        <p>(earns 2-5 gold)</p>
+        <form action="/process_money" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name='house'>
+          <button type='submit'>Find Gold!</button>
+        </form>
+      </div>
+      <div class="box">
+        <h3>Casino</h3>
+        <p>(earns/takes 0-50 gold)</p>
+        <form action="/process_money" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name='casino'>
+          <button type='submit'>Find Gold!</button>
+        </form>
+      </div>
+    </div>
+    <footer>
+      <p>Activities</p>
+      <div class="action">
+        <ul>
+          {% for act in request.session.my_list %}
+            {%  if 'gained' in act %}  
+              <li class=green>{{act}}</li>
+            {% endif %}
+            {% if 'lost' in act %}
+              <li class=red>{{act}}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+      <form action="/refresh">
+        {% csrf_token %}
+        <button type='submit'>Refresh</button>
+      </form>
+    </footer>
+  </div>
+</body>
+</html>

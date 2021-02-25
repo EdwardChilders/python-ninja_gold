@@ -1,0 +1,34 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
+
+#main{
+  width: 800px;
+  margin: 0px auto;
+}
+
+#container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+.action {
+  width: 800px;
+  height: 200px;
+  overflow: scroll;
+  border: solid 1px black;
+}
